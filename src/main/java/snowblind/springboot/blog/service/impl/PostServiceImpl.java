@@ -2,6 +2,7 @@ package snowblind.springboot.blog.service.impl;
 
 import org.springframework.stereotype.Service;
 import snowblind.springboot.blog.entity.Post;
+import snowblind.springboot.blog.exception.ResourceNotFoundException;
 import snowblind.springboot.blog.payload.PostDto;
 import snowblind.springboot.blog.repository.PostRepository;
 import snowblind.springboot.blog.service.PostService;
@@ -32,6 +33,31 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> getAllPost() {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public PostDto getPostById(long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+        return mapToDTO(post);
+    }
+
+    @Override
+    public PostDto updatePost(PostDto postDto, long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+
+        post.setTitle(postDto.getTitle());
+        post.setDescription(postDto.getDescription());
+        post.setContent(postDto.getContent());
+
+        Post updatePost = postRepository.save(post);
+        return mapToDTO(updatePost);
+    }
+
+    @Override
+    public void deletePost(long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+
+        postRepository.delete(post);
     }
 
     private Post mapToEntity(PostDto postDto){

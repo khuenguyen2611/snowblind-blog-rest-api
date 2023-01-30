@@ -5,7 +5,13 @@ import snowblind.springboot.blog.payload.PostDto;
 import java.util.List;
 
 public interface PostService {
-    public PostDto createPost(PostDto postDto);
+    PostDto createPost(PostDto postDto);
 
-    public List<PostDto> getAllPost();
+    List<PostDto> getAllPost();
+
+    PostDto getPostById(long id);
+
+    PostDto updatePost(PostDto postDto, long id);
+
+    void deletePost(long id);
 }
