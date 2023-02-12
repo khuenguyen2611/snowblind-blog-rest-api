@@ -1,6 +1,6 @@
 package snowblind.springboot.blog.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Getter
