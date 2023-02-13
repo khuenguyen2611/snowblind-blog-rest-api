@@ -74,7 +74,6 @@
 			<version>0.9.1</version>
 		</dependency>
 
-
 <!--		&lt;!&ndash; https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl &ndash;&gt;-->
 <!--		<dependency>-->
 <!--			<groupId>io.jsonwebtoken</groupId>-->
